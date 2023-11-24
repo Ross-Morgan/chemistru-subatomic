@@ -2,6 +2,7 @@ pub mod anti;
 pub mod force;
 pub mod spin;
 pub mod traits;
+pub mod macros;
 
 pub mod quark;
 
@@ -17,9 +18,6 @@ pub struct Pion;
 
 pub trait Hadron {
     type Composition;
-
-    /// Quarks comprising the hadron
-    fn quark_composition(&self) -> Self::Composition;
 }
 
 pub trait Meson: Hadron<Composition = [Quark; 2]> {}

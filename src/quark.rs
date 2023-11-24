@@ -1,47 +1,20 @@
-use crate::{traits::Fermion, force::StrongForce};
+use crate::{traits::Fermion, force::StrongForce, anti::{AntiMatter, Matter}, blank_impl, subatomic_impl};
 
 pub trait Quark: Fermion + StrongForce {}
 
-struct Up;
-struct Down;
-struct Strange;
-struct Charm;
-struct Top;
-struct Bottom;
+pub struct Up;
+pub struct Down;
+pub struct Strange;
+pub struct Charm;
+pub struct Top;
+pub struct Bottom;
 
-struct AntiUp;
-struct AntiDown;
-struct AntiStrange;
-struct AntiCharm;
-struct AntiTop;
-struct AntiBottom;
-
-macro_rules! blank_impl {
-    ($ty:ty, $($tr:ty),+ $(,)?) => {
-        $(
-            impl $tr for $ty {}
-        )+
-    };
-}
-
-macro_rules! subatomic_impl {
-    ($ty:ty, $at:ty, $mass:literal) => {
-        subatomic_single_impl!($ty, $mass);
-        subatomic_single_impl!($at, $mass);
-    };
-}
-
-macro_rules! subatomic_single_impl {
-    ($ty:ty, $mass:literal) => {
-        impl $crate::traits::SubAtomic for $ty {
-            fn spin_quantum_number(&self) -> $crate::spin::Spin {
-                $crate::spin::Spin::WholeHalf(0)
-            }
-
-            fn mass(&self) -> $crate::traits::MeVC2 { $mass }
-        }
-    }
-}
+pub struct AntiUp;
+pub struct AntiDown;
+pub struct AntiStrange;
+pub struct AntiCharm;
+pub struct AntiTop;
+pub struct AntiBottom;
 
 subatomic_impl!(Up, AntiUp, 2.2);
 subatomic_impl!(Down, AntiDown, 4.7);
@@ -50,9 +23,16 @@ subatomic_impl!(Strange, AntiStrange, 96.0);
 subatomic_impl!(Top, AntiTop, 173100.0);
 subatomic_impl!(Bottom, AntiBottom, 4180.0);
 
-blank_impl!(Up, Fermion, Quark);
-blank_impl!(Down, Fermion, Quark);
-blank_impl!(Charm, Fermion, Quark);
-blank_impl!(Strange, Fermion, Quark);
-blank_impl!(Top, Fermion, Quark);
-blank_impl!(Bottom, Fermion, Quark);
+blank_impl!(Up, Fermion, StrongForce, Quark, Matter);
+blank_impl!(Down, Fermion, StrongForce, Quark, Matter);
+blank_impl!(Charm, Fermion, StrongForce, Quark, Matter);
+blank_impl!(Strange, Fermion, StrongForce, Quark, Matter);
+blank_impl!(Top, Fermion, StrongForce, Quark, Matter);
+blank_impl!(Bottom, Fermion, StrongForce, Quark, Matter);
+
+blank_impl!(AntiUp, Fermion, StrongForce, Quark, AntiMatter);
+blank_impl!(AntiDown, Fermion, StrongForce, Quark, AntiMatter);
+blank_impl!(AntiCharm, Fermion, StrongForce, Quark, AntiMatter);
+blank_impl!(AntiStrange, Fermion, StrongForce, Quark, AntiMatter);
+blank_impl!(AntiTop, Fermion, StrongForce, Quark, AntiMatter);
+blank_impl!(AntiBottom, Fermion, StrongForce, Quark, AntiMatter);
