@@ -9,18 +9,18 @@ macro_rules! blank_impl {
 
 #[macro_export]
 macro_rules! subatomic_impl {
-    ($ty:ty, $at:ty, $mass:literal, $spin:literal) => {
-        $crate::subatomic_single_impl!($ty, $mass, $spin);
-        $crate::subatomic_single_impl!($at, $mass, $spin);
+    ($ty:ty, $at:ty, $mass:literal, ($spin_top:literal / $spin_bottom:literal)) => {
+        $crate::subatomic_single_impl!($ty, $mass, ($spin_top / $spin_bottom));
+        $crate::subatomic_single_impl!($at, $mass, ($spin_top / $spin_bottom));
     };
 }
 
 #[macro_export]
 macro_rules! subatomic_single_impl {
-    ($ty:ty, $mass:literal, ($spin_top:literal, $spin_bottom:literal)) => {
+    ($ty:ty, $mass:literal, ($spin_top:literal / $spin_bottom:literal)) => {
         impl $crate::traits::SubAtomic for $ty {
             fn spin_quantum_number(&self) -> $crate::spin::Spin {
-                $crate::spin::Spin(fraction::Fraction::new($spin_top, $spin_bottom))
+                $crate::spin::Spin::new(fraction::Fraction::new($spin_top, $spin_bottom))
             }
 
             fn mass(&self) -> $crate::traits::MeVC2 {

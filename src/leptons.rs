@@ -29,9 +29,9 @@ impl<T: Lepton + Matter> AntiNeutrino<T> {
     }
 }
 
-subatomic_impl!(Electron, Positron, 0.511, 0);
-subatomic_impl!(Muon, AntiMuon, 105.66, 0);
-subatomic_impl!(Tauon, AntiTauon, 1776.8, 0);
+subatomic_impl!(Electron, Positron, 0.511, (1 / 2));
+subatomic_impl!(Muon, AntiMuon, 105.66, (1 / 2));
+subatomic_impl!(Tauon, AntiTauon, 1776.8, (1 / 2));
 
 blank_impl!(Electron, Fermion, Lepton, StrongForce);
 blank_impl!(Positron, Fermion, Lepton, StrongForce);
@@ -44,4 +44,4 @@ anti_particle_pair!(Electron, Positron);
 anti_particle_pair!(Muon, AntiMuon);
 anti_particle_pair!(Tauon, AntiTauon);
 
-subatomic_impl!(Neutrino<Electron>, AntiNeutrino<Electron>, 0.0000022, 0);
+subatomic_impl!(Neutrino<Electron>, AntiNeutrino<Electron>, 0.0000022, (0 / 1));

@@ -16,12 +16,12 @@ pub struct AntiCharm;
 pub struct AntiTop;
 pub struct AntiBottom;
 
-subatomic_impl!(Up, AntiUp, 2.2);
-subatomic_impl!(Down, AntiDown, 4.7);
-subatomic_impl!(Charm, AntiCharm, 1280.0);
-subatomic_impl!(Strange, AntiStrange, 96.0);
-subatomic_impl!(Top, AntiTop, 173100.0);
-subatomic_impl!(Bottom, AntiBottom, 4180.0);
+subatomic_impl!(Up, AntiUp, 2.2, (1 / 2));
+subatomic_impl!(Down, AntiDown, 4.7,(1 / 2));
+subatomic_impl!(Charm, AntiCharm, 1280.0, (1 / 2));
+subatomic_impl!(Strange, AntiStrange, 96.0, (1 / 2));
+subatomic_impl!(Top, AntiTop, 173100.0, (1 / 2));
+subatomic_impl!(Bottom, AntiBottom, 4180.0, (1 / 2));
 
 blank_impl!(Up, Fermion, StrongForce, Quark,);
 blank_impl!(Down, Fermion, StrongForce, Quark);

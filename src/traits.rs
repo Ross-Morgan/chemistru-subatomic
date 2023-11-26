@@ -3,7 +3,6 @@ use crate::{
     decay::DecayEquation,
     force::StrongForce,
     quark::Quark,
-    spin::RawSpin,
 };
 
 use super::spin::Spin;
@@ -16,9 +15,9 @@ pub trait SubAtomic {
     fn mass(&self) -> MeVC2;
 }
 
-pub trait Fermion: RawSpin<true> {}
+pub trait Fermion {}
 
-pub trait Boson: RawSpin<false> {}
+pub trait Boson {}
 
 pub trait Lepton: Fermion {}
 
