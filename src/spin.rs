@@ -1,31 +1,17 @@
-use crate::traits::{Boson, Fermion, SubAtomic};
+use crate::traits::SubAtomic;
 
 #[derive(Copy, Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
-pub enum Spin {
-    Whole(i8),
-    WholeHalf(i8),
-}
+pub struct Spin(fraction::GenericFraction<u8>);
 
-pub trait RawSpin<const ADD_SPIN: bool>: SubAtomic {
+pub trait RawSpin: SubAtomic {
     fn spin_quantum_number_raw(&self) -> f64;
 }
 
-impl<T: Fermion> RawSpin<true> for T {
+impl<T: SubAtomic> RawSpin for T {
     fn spin_quantum_number_raw(&self) -> f64 {
-        if let Spin::WholeHalf(inner) = self.spin_quantum_number() {
-            inner as f64 + 0.5
-        } else {
-            panic!("Fermion erroneously has integer spin")
-        }
-    }
-}
+        let frac = self.spin_quantum_number().0;
 
-impl<T: Boson> RawSpin<false> for T {
-    fn spin_quantum_number_raw(&self) -> f64 {
-        if let Spin::Whole(inner) = self.spin_quantum_number() {
-            inner as f64
-        } else {
-            panic!("Boson erroneously has non-integer spin")
-        }
+        frac.numer().expect("Spin fraction has no numerator");
+        frac.denom().expect("Spin fraction has no demonimator");
     }
 }
