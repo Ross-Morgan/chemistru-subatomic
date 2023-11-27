@@ -3,6 +3,9 @@ use crate::{
     traits::{Hadron, Decay}, charges_to_string_impl, decay::DecayEquation,
 };
 
+use super::pions::{Pion0, PionMinus, PionPlus};
+use crate::leptons::{MuonPlus, Neutrino};
+
 pub struct Kaon0;
 pub struct KaonMinus;
 pub struct KaonPlus;
@@ -35,9 +38,17 @@ impl Decay for KaonPlus {
     fn all_possible_decays() -> Vec<DecayEquation> {
         vec![
             DecayEquation::new(
+                vec![Box::new(KaonPlus)],
+                vec![Box::new(MuonPlus), Box::new(Neutrino::Muon)],
+            ),
+            DecayEquation::new(
+                vec![Box::new(KaonPlus)],
+                vec![Box::new(PionPlus), Box::new(Pion0)],
+            ),
+            DecayEquation::new(
                 vec![],
-                vec![],
-            )
+                vec![],    
+            ),
         ]
     }
 }
