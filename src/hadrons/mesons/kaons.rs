@@ -39,7 +39,7 @@ impl Decay for KaonPlus {
         vec![
             DecayEquation::new(
                 vec![Box::new(KaonPlus)],
-                vec![Box::new(MuonPlus), Box::new(Neutrino::Muon)],
+                vec![Box::new(MuonPlus), Box::new(Neutrino::<Muon>)],
             ),
             DecayEquation::new(
                 vec![Box::new(KaonPlus)],
