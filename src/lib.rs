@@ -6,6 +6,8 @@ pub mod macros;
 
 pub mod quark;
 
+pub mod bosons;
+pub mod fermions;
 pub mod hadrons;
 pub mod leptons;
 
@@ -73,12 +75,4 @@ pub mod mesons {
         Minus,
         Zero,
     }
-}
-
-pub mod bosons {
-    pub struct Photon;
-    pub struct WPlusBoson;
-    pub struct WMinusBoson;
-    pub struct ZZeroBoson;
-    pub struct Gluon;
 }
