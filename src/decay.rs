@@ -1,0 +1,1 @@
+pub trait Decay: SubAtomic {}
