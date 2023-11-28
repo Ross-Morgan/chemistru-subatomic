@@ -1,7 +1,7 @@
 use crate::{
     anti::{AntiMatter, Matter},
     quark::Quark,
-    spin::RawSpin, force::StrongForce,
+    force::StrongForce,
 };
 
 use super::spin::Spin;
@@ -14,9 +14,9 @@ pub trait SubAtomic {
     fn mass(&self) -> MeVC2;
 }
 
-pub trait Fermion: RawSpin<true> {}
+pub trait Fermion: SubAtomic {}
 
-pub trait Boson: RawSpin<false> {}
+pub trait Boson: SubAtomic {}
 
 pub trait Lepton: Fermion {}
 
@@ -50,4 +50,16 @@ where
     Q2: Quark + AntiMatter,
 {}
 
-pub trait Decay: SubAtomic {}
+impl<T: Hadron<Composition = (Q1, Q2, Q3)>, Q1, Q2, Q3> AntiMatter for T
+where
+    Q1: Quark + AntiMatter,
+    Q2: Quark + AntiMatter,
+    Q3: Quark + AntiMatter,
+{}
+
+impl<T: Hadron<Composition = (Q1, Q2, Q3)>, Q1, Q2, Q3> Matter for T
+where
+    Q1: Quark + Matter,
+    Q2: Quark + Matter,
+    Q3: Quark + Matter,
+{}
