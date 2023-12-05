@@ -5,7 +5,7 @@ pub struct Spin(fraction::GenericFraction<u8>);
 
 
 impl Spin {
-    fn spin_quantum_number_raw(&self) -> f64 {
+    fn into_inner(self) -> f64 {
         let frac = self.spin_quantum_number().0;
 
         frac.numer().expect("Spin fraction has no numerator");
