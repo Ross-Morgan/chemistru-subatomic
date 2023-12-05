@@ -12,7 +12,7 @@ use crate::spin::Spin;
 pub trait SubAtomic {
     fn mass(&self) -> Mass;
     fn charge(&self) -> Charge;
-    fn spin_quantum_number(&self) -> Spin;
+    fn spin(&self) -> Spin;
 }
 
 
